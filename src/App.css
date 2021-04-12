@@ -29,6 +29,51 @@ body {
     /* margin-bottom: 40px; */
 }
 
+.cover_img {
+    height: 50vh;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leagueImg {
+    width: 100px;
+    height: 100px;
+}
+
+.team_img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.favTeamDiv {
+    height: auto;
+    background-color: #1d0033;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.fav_team_name {
+    padding: 10px 40px;
+    background-color: white !important;
+    border-radius: 20px;
+}
+
+/* Navbar Style  */
+
+nav {
+    background-color: transparent !important;
+}
+
+.nav-item {
+    margin-left: 40px;
+}
+
 /* InputField Style  */
 
 input {
@@ -59,6 +104,101 @@ input {
     -moz-transition: all 0.4s ease;
     transition: all 0.4s ease;
 }
+
+/* Select Style  */
+
+/* .select--no-search .select2-search {
+    display: none !important;
+}
+
+.rs-select2 .select2-container {
+    width: 100% !important;
+    outline: none;
+    background: #fafafa;
+    -webkit-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+    -moz-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.rs-select2 .select2-container .select2-selection--single {
+    outline: none;
+    border: none;
+    height: 50px;
+    background: transparent;
+}
+
+.rs-select2 .select2-container .select2-selection--single .select2-selection__rendered {
+    line-height: 50px;
+    padding-left: 0;
+    color: #555;
+    font-size: 16px;
+    font-family: inherit;
+    padding-left: 22px;
+    padding-right: 50px;
+}
+
+.rs-select2 .select2-container .select2-selection--single .select2-selection__arrow {
+    height: 50px;
+    right: 20px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.rs-select2 .select2-container .select2-selection--single .select2-selection__arrow b {
+    display: none;
+}
+
+.rs-select2 .select2-container .select2-selection--single .select2-selection__arrow:after {
+    font-family: "Material-Design-Iconic-Font";
+    content: '\f2f9';
+    font-size: 24px;
+    color: #999;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.rs-select2 .select2-container.select2-container--open .select2-selection--single .select2-selection__arrow::after {
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+.select2-container--open .select2-dropdown--below {
+    border: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e0e0e0;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.select2-container--default .select2-results__option {
+    padding-left: 22px;
+} */
 
 /* Buttons Style  */
 
@@ -95,11 +235,20 @@ input {
     line-height: 60px;
     border-radius: 20px;
     outline: none !important;
-    /* background-color: "#f8faf4"; */
+    background-color: #f8faf4;
     opacity: 0.9;
 }
 
-.btn_custom:hover {
+.btn_team {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    outline: none !important;
+    background-color: #f8faf4;
+    opacity: 0.9;
+}
+
+.btn_team:hover, .btn_custom:hover {
     border: 1px solid #bfbfbf !important;
     opacity: 1;
 }
@@ -120,6 +269,18 @@ input {
     background: transparent;
     border: none;
     outline: none !important;
+}
+
+.btn_bet {
+    width: 100%;
+    height: 80px;
+    border: none;
+    outline: none !important;
+}
+
+.btn_bet:hover {
+    background-color: #1d0033;
+    color: white;
 }
 
 /* Radio Button  */
@@ -199,6 +360,10 @@ input {
     transform: rotate(270deg);
 }
 
+.predict_icon {
+    transform: rotate(90deg);
+}
+
 .icon {
     position: absolute;
     right: 5%;
@@ -224,4 +389,92 @@ input {
 
 .separator::after {
     margin-left: 20px;
+}
+
+/* Select Favorite Team Css  */
+
+.main_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main_container .option_item {
+    display: block;
+    position: relative;
+    width: 175px;
+    height: 175px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    ;
+}
+
+.main_container .option_item .checkbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0;
+}
+
+.option_item .option_inner {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 5px;
+    text-align: center;
+    padding: 58px 40px;
+    cursor: pointer;
+    color: #585c68;
+    display: block;
+    border: 5px solid transparent;
+    position: relative;
+}
+
+.option_item .checkbox:checked~.option_inner.facebook {
+    border-color: #3b5999;
+    color: #3b5999;
+}
+
+.option_item .option_inner .tickmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 20px solid;
+    border-color: #000 transparent transparent #000;
+    display: none;
+}
+
+.option_item .option_inner .tickmark:before {
+    content: "";
+    position: absolute;
+    top: -18px;
+    left: -18px;
+    width: 15px;
+    height: 5px;
+    border: 3px solid;
+    border-color: transparent transparent #fff #fff;
+    transform: rotate(-45deg);
+}
+
+.option_item .checkbox:checked~.option_inner .tickmark {
+    display: block;
+}
+
+.option_item .option_inner.facebook .tickmark {
+    border-color: #3b5999 transparent transparent #3b5999;
+}
+
+/* Prediction Css  */
+
+.pl_img {
+    max-width: 90px;
+    max-height: 90px;
+}
+
+/* Media Query  */
+
+@media only screen and (max-width: 690px) {
+    .selectFavTeam {
+        display: none;
+    }
 }

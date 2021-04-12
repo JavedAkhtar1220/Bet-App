@@ -16,7 +16,6 @@ import Alert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import firebase from '../config/firebase';
-// import 'bootstrap/dist/js/bootstrap.bundle';
 
 const BorderLinearProgress = withStyles((theme) => ({
     root: {
@@ -62,20 +61,26 @@ const Signup = () => {
 
     const onSubmit = data => {
         setBtnDisable(true);
-        history.push('/selectleague');
-        // firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
-        //     .then((userCredential) => {
-        //         firebase.firestore().collection("users").doc(userCredential.user.uid).set({
-        //             username: `${data.firstName} ${data.lastName}`,
-        //             email: data.email,
-        //         })
-        //     })
-        //     .catch((error) => {
-        //         var errorCode = error.code;
-        //         var errorMessage = error.message;
-        //         setErrorMsg(errorMessage);
-        //         // ..
-        //     });
+        setOpen(false);
+        firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
+            .then((userCredential) => {
+                firebase.firestore().collection("users").doc(userCredential.user.uid).set({
+                    username: `${data.firstName} ${data.lastName}`,
+                    email: data.email,
+                    uid: userCredential.user.uid,
+                    game: data.favTeam,
+                })
+                    .then(() => {
+                        history.push('/favoriteteam');
+                    })
+            })
+            .catch((error) => {
+                setBtnDisable(false);
+                var errorMessage = error.message;
+                setErrorMsg(errorMessage);
+                setOpen(true);
+                // ..
+            });
     }
 
     return (
@@ -123,7 +128,7 @@ const Signup = () => {
                                 <div className="mb-3">
                                     <div className="row">
                                         <div className="col">
-                                            <label for="name">First Name</label>
+                                            <label htmlFor="name">First Name<span style={{ color: "red" }}>*</span></label>
                                             <div style={{ position: "relative" }}>
                                                 <i className="icon"><PersonIcon /></i>
                                                 <input type="text"
@@ -146,7 +151,7 @@ const Signup = () => {
                                             </span>}
                                         </div>
                                         <div className="col">
-                                            <label for="name">Last Name</label>
+                                            <label htmlFor="name">Last Name<span style={{ color: "red" }}>*</span></label>
                                             <div style={{ position: "relative" }}>
                                                 <i className="icon"><PersonIcon /></i>
                                                 <input type="text"
@@ -173,7 +178,7 @@ const Signup = () => {
 
                                 {/* Email TextField */}
                                 <div className="mb-3">
-                                    <label for="email">Email</label>
+                                    <label htmlFor="email">Email<span style={{ color: "red" }}>*</span></label>
                                     <div style={{ position: "relative" }}>
                                         <i className="icon"><MailIcon /></i>
                                         <input type="text"
@@ -192,24 +197,56 @@ const Signup = () => {
                                     </span>}
                                 </div>
 
-                                {/* Gender */}
+                                {/* Game TextField */}
                                 <div className="mb-3">
+                                    <label htmlFor="email">Which Game you are supporting? (optional) </label>
+
+                                    <select className='form-select mt-2'
+                                        name="favTeam"
+                                        ref={register}
+                                    >
+                                        <option value="" disabled selected>Select Favorite Game</option>
+                                        <option value="football">Football</option>
+                                        <option value="basketball">Basketball</option>
+                                        <option value="handball">Handball</option>
+                                        {/* {data.map((v, i) => {
+                                            return <option value={v.name} key={i}>{v.name}</option>
+                                        })} */}
+                                    </select>
+                                    {/* {errors.favTeam && <span className="small text-danger">
+                                        {errors.favTeam.message}
+                                    </span>} */}
+                                </div>
+
+                                {/* Gender */}
+                                {/* <div className="mb-3">
                                     <label>Gender</label>
                                     <div class="p-t-10">
                                         <label class="radio-container mr-5">Male
-                                            <input type="radio" name="gender" />
+                                            <input type="radio" name="gender"
+                                                ref={register({
+                                                    required: "Select Gender"
+                                                })}
+                                            />
                                             <span class="checkmark"></span>
                                         </label>
                                         <label class="radio-container">Female
-                                            <input type="radio" name="gender" />
+                                            <input type="radio" name="gender"
+                                                ref={register({
+                                                    required: "Select Gender"
+                                                })}
+                                            />
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
-                                </div>
+                                    {errors.gender && <span className="small text-danger">
+                                        {errors.gender.message}
+                                    </span>}
+                                </div> */}
 
                                 {/* Password TextField */}
                                 <div className="mb-3">
-                                    <label for="password">Password</label>
+                                    <label htmlFor="password">Password<span style={{ color: "red" }}>*</span></label>
                                     <div style={{ position: "relative" }}>
                                         <i className="icon"><LockIcon /></i>
                                         <input
@@ -242,7 +279,7 @@ const Signup = () => {
 
                                 {/* Confirm Password TextField */}
                                 <div className="mb-3">
-                                    <label for="password">Confirm Password</label>
+                                    <label htmlFor="password">Confirm Password<span style={{ color: "red" }}>*</span></label>
                                     <div style={{ position: "relative" }}>
                                         <i className="icon"><LockIcon /></i>
                                         <input
@@ -263,7 +300,7 @@ const Signup = () => {
                                         <span className="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
                                         <span className="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
                                         <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                                    </button> : <button class="btn_signup" type="submit">Signup</button>}
+                                    </button> : <button className="btn_signup" type="submit">Signup</button>}
                                 </div>
                             </form>
                         </div>

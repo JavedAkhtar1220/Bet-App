@@ -1,33 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from "react-hook-form";
-import PersonIcon from '@material-ui/icons/Person';
+// import PersonIcon from '@material-ui/icons/Person';
 import MailIcon from '@material-ui/icons/Mail';
 import LockIcon from '@material-ui/icons/Lock';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import NavigationIcon from '@material-ui/icons/Navigation';
+import BorderLinearProgress from '../components/BorderLinearProgress';
+import Collapse from '@material-ui/core/Collapse';
+import Alert from '@material-ui/lab/Alert';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
+import firebase from '../config/firebase';
 import '../App.css';
-import { useHistory } from 'react-router-dom';
-// import 'bootstrap/dist/js/bootstrap.bundle';
-
-const BorderLinearProgress = withStyles((theme) => ({
-    root: {
-        height: 10,
-        borderRadius: 5,
-    },
-    colorPrimary: {
-        backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
-    },
-    bar: {
-        borderRadius: 5,
-        backgroundColor: '#1d0033',
-    },
-}))(LinearProgress);
-
-
 
 const Login = () => {
     const { register, handleSubmit, watch, errors } = useForm();
@@ -35,7 +22,10 @@ const Login = () => {
     password.current = watch("password", "");
     const [btnDisable, setBtnDisable] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
     const history = useHistory();
+
 
     const handleChange = () => {
         if (showPassword) {
@@ -56,10 +46,31 @@ const Login = () => {
 
     const onSubmit = data => {
         setBtnDisable(true);
-        setTimeout(() => {
-            alert("Account created successfully");
-            setBtnDisable(false);
-        }, 3000);
+        setOpen(false);
+        firebase.auth().signInWithEmailAndPassword(data.email, data.password)
+            .then(user => {
+                firebase.firestore().collection("Favorite_teams").doc(user.user.uid).get()
+                    .then(doc => {
+                        if (doc.exists) {
+                            var promise = new Promise((resolve) => {
+                                resolve(localStorage.setItem("favorite_teams", JSON.stringify(doc.data().teams)));
+                            })
+                            promise.then(() => {
+                                history.push('/home');
+                            })
+                        }
+                        else {
+                            history.push('/favoriteteam');
+                        }
+                    })
+            })
+            .catch((error) => {
+                setBtnDisable(false);
+                var errorMessage = error.message;
+                setErrorMsg(errorMessage);
+                setOpen(true);
+                // ..
+            });
     }
 
     return (
@@ -79,11 +90,34 @@ const Login = () => {
                                 <p>Please fill out the all necessary fields properly...</p>
                                 <BorderLinearProgress variant="determinate" value={60} />
                             </div>
+
+                            <div className="mb-3">
+                                <Collapse in={open}>
+                                    <Alert
+                                        severity="error"
+                                        action={
+                                            <IconButton
+                                                aria-label="close"
+                                                color="inherit"
+                                                size="small"
+                                                onClick={() => {
+                                                    setOpen(false);
+                                                }}
+                                            >
+                                                <CloseIcon fontSize="inherit" />
+                                            </IconButton>
+                                        }
+                                    >
+                                        {errorMsg}!
+                                    </Alert>
+                                </Collapse>
+                            </div>
+
                             <form onSubmit={handleSubmit(onSubmit)}>
 
                                 {/* Email TextField */}
                                 <div className="mb-3">
-                                    <label for="email">Email</label>
+                                    <label htmlFor="email">Email</label>
                                     <div style={{ position: "relative" }}>
                                         <i className="icon"><MailIcon /></i>
                                         <input type="text"
@@ -104,7 +138,7 @@ const Login = () => {
 
                                 {/* Password TextField */}
                                 <div className="mb-3">
-                                    <label for="password">Password</label>
+                                    <label htmlFor="password">Password</label>
                                     <div style={{ position: "relative" }}>
                                         <i className="icon"><LockIcon /></i>
                                         <input
@@ -136,7 +170,7 @@ const Login = () => {
                                         <span className="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
                                         <span className="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
                                         <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                                    </button> : <button class="btn_signup" type="submit">Login</button>}
+                                    </button> : <button className="btn_signup" type="submit">Login</button>}
                                 </div>
                             </form>
                         </div>
