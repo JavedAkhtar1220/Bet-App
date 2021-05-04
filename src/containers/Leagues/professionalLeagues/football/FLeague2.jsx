@@ -1,11 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import Navbar from '../../../components/Navbar';
-// import football from '../../../images/football.png';
-import BorderLinearProgress from '../../../components/BorderLinearProgress';
+import Navbar from '../../../../components/Navbar';
+import FavTeam from '../../../../components/FavTeam';
+import BorderLinearProgress from '../../../../components/BorderLinearProgress';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import FavTeam from '../../../components/FavTeam';
-// import data from '../data';
 
 const data = [
     {
@@ -51,7 +49,7 @@ const FLeague2 = () => {
     }
 
     const goToBack = () => {
-        history.push('/football');
+        history.goBack();
     }
 
     return (

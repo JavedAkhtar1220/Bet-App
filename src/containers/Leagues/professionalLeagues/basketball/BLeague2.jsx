@@ -1,17 +1,21 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import Navbar from '../../../components/Navbar';
+import Navbar from '../../../../components/Navbar';
+import FavTeam from '../../../../components/FavTeam';
 // import football from '../../../images/football.png';
-import BorderLinearProgress from '../../../components/BorderLinearProgress';
+import BorderLinearProgress from '../../../../components/BorderLinearProgress';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import FavTeam from '../../../components/FavTeam';
 
-const HLeague2 = () => {
-
+const BLeague2 = () => {
     const history = useHistory();
 
+    const team = (team) => {
+        localStorage.setItem('team', team)
+        history.push('/selectoption');
+    }
+
     const goToBack = () => {
-        history.push('/handball');
+        history.goBack();
     }
 
     return (
@@ -33,7 +37,7 @@ const HLeague2 = () => {
                             </button>
                         </div>
                         <FavTeam />
-                        <h1 className="signup_title mt-4">Handball-Teams (League C)</h1>
+                        <h1 className="signup_title mt-4">Basketball-Teams (League B)</h1>
                         <BorderLinearProgress variant="determinate" value={60} />
                     </div>
                     <div className="row mt-5">
@@ -64,4 +68,4 @@ const HLeague2 = () => {
     )
 }
 
-export default HLeague2;
+export default BLeague2;

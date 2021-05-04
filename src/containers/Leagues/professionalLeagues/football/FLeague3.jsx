@@ -1,22 +1,51 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import Navbar from '../../../components/Navbar';
-// import football from '../../../images/football.png';
-import BorderLinearProgress from '../../../components/BorderLinearProgress';
+import Navbar from '../../../../components/Navbar';
+import FavTeam from '../../../../components/FavTeam';
+import BorderLinearProgress from '../../../../components/BorderLinearProgress';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import FavTeam from '../../../components/FavTeam';
 
-const BLeague3 = () => {
+const data = [
+    {
+        name: "Manchester City",
+        logo: "https://media.api-sports.io/football/teams/50.png",
+    },
+    {
+        name: "Brighton",
+        logo: "https://media.api-sports.io/football/teams/51.png",
+    },
+    {
+        name: "Crystal Palace",
+        logo: "https://media.api-sports.io/football/teams/52.png",
+    },
+    {
+        name: "Sheffield Utd",
+        logo: "https://media.api-sports.io/football/teams/62.png",
+    },
+    {
+        name: "Aston Villa",
+        logo: "https://media.api-sports.io/football/teams/66.png",
+    },
+    {
+        name: "Norwich",
+        logo: "https://media.api-sports.io/football/teams/71.png",
+    },
+]
 
+const FLeague3 = () => {
     const history = useHistory();
 
-    const team = (team) => {
-        localStorage.setItem('team', team)
-        history.push('/selectoption');
+    const favTeam = team => {
+        var promise = new Promise((resolve) => {
+            resolve(localStorage.setItem('fav_team', team));
+        })
+        promise.then(() => {
+            history.push('/selectoption');
+        })
     }
 
     const goToBack = () => {
-        history.push('/basketball')
+        history.goBack();
     }
 
     return (
@@ -38,11 +67,18 @@ const BLeague3 = () => {
                             </button>
                         </div>
                         <FavTeam />
-                        <h1 className="signup_title mt-4">Basketball-Teams (League C)</h1>
+                        <h1 className="signup_title mt-4">Football-Teams (League C)</h1>
                         <BorderLinearProgress variant="determinate" value={60} />
                     </div>
                     <div className="row mt-5">
-                        <div className="col-lg-3 col-md-3 col-sm-4 col-10 mb-3">
+                        {data.map((v, i) => {
+                            return <div className="col-lg-3 col-md-4 col-sm-6 col-12 mb-3" key={i}>
+                                <button className="btn_team shadow border p-4" onClick={() => favTeam(v.name)}>
+                                    <img src={v.logo} alt={v.name} width="100%" height="100%" />
+                                </button>
+                            </div>
+                        })}
+                        {/* <div className="col-lg-3 col-md-3 col-sm-4 col-10 mb-3">
                             <button className="btn_team shadow border p-4">
                                 Team 1
                             </button>
@@ -61,7 +97,7 @@ const BLeague3 = () => {
                             <button className="btn_team shadow border p-4">
                                 Team 3
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -69,4 +105,4 @@ const BLeague3 = () => {
     )
 }
 
-export default BLeague3;
+export default FLeague3;

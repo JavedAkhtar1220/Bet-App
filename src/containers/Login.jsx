@@ -49,20 +49,30 @@ const Login = () => {
         setOpen(false);
         firebase.auth().signInWithEmailAndPassword(data.email, data.password)
             .then(user => {
-                firebase.firestore().collection("Favorite_teams").doc(user.user.uid).get()
-                    .then(doc => {
-                        if (doc.exists) {
-                            var promise = new Promise((resolve) => {
-                                resolve(localStorage.setItem("favorite_teams", JSON.stringify(doc.data().teams)));
-                            })
-                            promise.then(() => {
-                                history.push('/home');
-                            })
-                        }
-                        else {
-                            history.push('/favoriteteam');
-                        }
-                    })
+                var current_user = firebase.auth().currentUser;
+                console.log()
+                if (current_user.emailVerified) {
+                    firebase.firestore().collection("Favorite_teams").doc(user.user.uid).get()
+                        .then(doc => {
+                            if (doc.exists) {
+                                var promise = new Promise((resolve) => {
+                                    resolve(localStorage.setItem("favorite_teams", JSON.stringify(doc.data().teams)));
+                                })
+                                promise.then(() => {
+                                    history.push('/home');
+                                })
+                            }
+                            else {
+                                history.push('/favoriteteam');
+                            }
+                        })
+                }
+                else {
+                    setBtnDisable(false);
+                    setOpen(true);
+                    setErrorMsg("Invalid email or password")
+                }
+
             })
             .catch((error) => {
                 setBtnDisable(false);

@@ -1,30 +1,30 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
-import Navbar from '../../components/Navbar';
-import handball from '../../images/handball.png';
-import BorderLinearProgress from '../../components/BorderLinearProgress';
+import Navbar from '../../../components/Navbar';
+import basketball from '../../../images/basketball.png';
+import BorderLinearProgress from '../../../components/BorderLinearProgress';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import FavTeam from '../../components/FavTeam';
-import firebase from '../../config/firebase';
+import FavTeam from '../../../components/FavTeam';
+import firebase from '../../../config/firebase';
 
-const Handball = () => {
+const Basketball = () => {
 
     const history = useHistory();
 
     const goToLeague1 = () => {
-        history.push('/handballleague1');
+        history.push('/professionalleague/basketballleague1');
     }
 
     const goToLeague2 = () => {
-        history.push('/handballleague2');
+        history.push('/professionalleague/basketballleague2');
     }
 
     const goToLeague3 = () => {
-        history.push('/handballleague3');
+        history.push('/professionalleague/basketballleague3');
     }
 
     const goToBack = () => {
-        history.push('/professionalleague');
+        history.goBack();
     }
 
     useEffect(() => {
@@ -38,6 +38,7 @@ const Handball = () => {
             }
         })
     }, [])
+
 
     return (
         <div>
@@ -56,7 +57,7 @@ const Handball = () => {
                         </button>
                     </div>
                     <FavTeam />
-                    <h1 className="signup_title text-center mt-4">Handball</h1>
+                    <h1 className="signup_title text-center mt-4">Basketball</h1>
                     <div className="mt-3 mb-5">
                         <p>Please select the league you want to play</p>
                         <BorderLinearProgress variant="determinate" value={60} />
@@ -68,7 +69,7 @@ const Handball = () => {
                                     <div className="col-10">
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-4 col-12 d-flex justify-content-center align-items-center">
-                                                <img src={handball} alt="professional league" className="leagueImg" />
+                                                <img src={basketball} alt="professional league" className="leagueImg" />
                                             </div>
                                             <div className="col-lg-8 col-md-8 col-sm-8 col-12 text-lg-left text-md-left text-sm-left text-center">
                                                 <p className="mb-0">League A</p>
@@ -85,7 +86,7 @@ const Handball = () => {
                                     <div className="col-10">
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-4 col-12 d-flex justify-content-center align-items-center">
-                                                <img src={handball} alt="professional league" className="leagueImg" />
+                                                <img src={basketball} alt="professional league" className="leagueImg" />
                                             </div>
                                             <div className="col-lg-8 col-md-8 col-sm-8 col-12 text-lg-left text-md-left text-sm-left text-center">
                                                 <p className="mb-0">League B</p>
@@ -102,7 +103,7 @@ const Handball = () => {
                                     <div className="col-10">
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-4 col-12 d-flex justify-content-center align-items-center">
-                                                <img src={handball} alt="professional league" className="leagueImg" />
+                                                <img src={basketball} alt="professional league" className="leagueImg" />
                                             </div>
                                             <div className="col-lg-8 col-md-8 col-sm-8 col-12 text-lg-left text-md-left text-sm-left text-center">
                                                 <p className="mb-0">League C</p>
@@ -120,4 +121,4 @@ const Handball = () => {
     )
 }
 
-export default Handball;
+export default Basketball;

@@ -1,30 +1,30 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
-import Navbar from '../../components/Navbar';
-import football from '../../images/football.png';
-import BorderLinearProgress from '../../components/BorderLinearProgress';
+import Navbar from '../../../components/Navbar';
+import football from '../../../images/football.png';
+import BorderLinearProgress from '../../../components/BorderLinearProgress';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import FavTeam from '../../components/FavTeam';
-import firebase from '../../config/firebase';
+import FavTeam from '../../../components/FavTeam';
+import firebase from '../../../config/firebase';
 
 const Football = () => {
 
     const history = useHistory();
 
-    const goToLeague1 = () => {
-        history.push('/footballleague1');
+    const createLeague = () => {
+        history.push('/nonprofessionalleague/createleague');
     }
 
-    const goToLeague2 = () => {
-        history.push('/footballleague2');
+    const joinPublicLeague = () => {
+        history.push('/nonprofessionalleague/publicleague');
     }
 
-    const goToLeague3 = () => {
-        history.push('/footballleague3');
+    const joinPrivateLeague = () => {
+        history.push('/nonprofessionalleague/privateleague');
     }
 
     const goToBack = () => {
-        history.push('/professionalleague');
+        history.goBack();
     }
 
     useEffect(() => {
@@ -41,7 +41,6 @@ const Football = () => {
 
 
     return (
-
         <div>
             <Navbar />
             <div className="cover_img">
@@ -65,15 +64,15 @@ const Football = () => {
                     </div>
                     <div className="row mt-5">
                         <div className="col-12">
-                            <button className="btn_custom shadow border mb-2 p-4" onClick={goToLeague1}>
+                            <button className="btn_custom shadow border mb-2 p-4" onClick={createLeague}>
                                 <div className="row">
                                     <div className="col-10">
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-4 col-12 d-flex justify-content-center align-items-center">
-                                                <img src={football} alt="professional league" className="leagueImg" />
+                                                <img src={football} alt="Non Professional League" className="leagueImg" />
                                             </div>
                                             <div className="col-lg-8 col-md-8 col-sm-8 col-12 text-lg-left text-md-left text-sm-left text-center">
-                                                <p className="mb-0">League A</p>
+                                                <p className="mb-0">Create a Private league</p>
                                                 <p className="mb-0 selectFavTeam" style={{ marginTop: "-30px" }}>Select your favorite team.</p>
                                             </div>
                                         </div>
@@ -82,15 +81,15 @@ const Football = () => {
                             </button>
                         </div>
                         <div className="col-12">
-                            <button className="btn_custom shadow border mb-2 p-4" onClick={goToLeague2}>
+                            <button className="btn_custom shadow border mb-2 p-4" onClick={joinPrivateLeague}>
                                 <div className="row">
                                     <div className="col-10">
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-4 col-12 d-flex justify-content-center align-items-center">
-                                                <img src={football} alt="professional league" className="leagueImg" />
+                                                <img src={football} alt="Non Professional League" className="leagueImg" />
                                             </div>
                                             <div className="col-lg-8 col-md-8 col-sm-8 col-12 text-lg-left text-md-left text-sm-left text-center">
-                                                <p className="mb-0">League B</p>
+                                                <p className="mb-0">Join Private League</p>
                                                 <p className="mb-0 selectFavTeam" style={{ marginTop: "-30px" }}>Select your favorite team.</p>
                                             </div>
                                         </div>
@@ -99,15 +98,15 @@ const Football = () => {
                             </button>
                         </div>
                         <div className="col-12">
-                            <button className="btn_custom shadow border mb-2 p-4" onClick={goToLeague3}>
+                            <button className="btn_custom shadow border mb-2 p-4" onClick={joinPublicLeague}>
                                 <div className="row">
                                     <div className="col-10">
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-4 col-12 d-flex justify-content-center align-items-center">
-                                                <img src={football} alt="professional league" className="leagueImg" />
+                                                <img src={football} alt="Non Professional League" className="leagueImg" />
                                             </div>
                                             <div className="col-lg-8 col-md-8 col-sm-8 col-12 text-lg-left text-md-left text-sm-left text-center">
-                                                <p className="mb-0">League C</p>
+                                                <p className="mb-0">Join Public League</p>
                                                 <p className="mb-0 selectFavTeam" style={{ marginTop: "-30px" }}>Select your favorite team.</p>
                                             </div>
                                         </div>

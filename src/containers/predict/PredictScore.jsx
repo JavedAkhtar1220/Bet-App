@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
 import Navbar from '../../components/Navbar';
 import BorderLinearProgress from '../../components/BorderLinearProgress';
@@ -14,50 +14,6 @@ const PredictScore = () => {
     const goToBack = () => {
         history.goBack();
     }
-
-    useEffect(() => {
-
-
-        fetch("https://soccer.sportmonks.com/api/v2.0/leagues")
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-        // fetch("https://api-football-beta.p.rapidapi.com/leagues?id=61", {
-        //     "method": "GET",
-        //     "headers": {
-        //         "x-rapidapi-key": "76c5f653d1mshbe6a1ebc14bcb2bp1f78bdjsn5fb9e4c4660d",
-        //         "x-rapidapi-host": "api-football-beta.p.rapidapi.com"
-        //     }
-        // })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log(data);
-        //     })
-        //     .catch(err => {
-        //         console.error(err);
-        //     });
-        // fetch("https://football-prediction-api.p.rapidapi.com/api/v2/predictions?iso_date=2018-12-01&market=classic&federation=UEFA", {
-        //     "method": "GET",
-        //     "headers": {
-        //         "x-rapidapi-key": "76c5f653d1mshbe6a1ebc14bcb2bp1f78bdjsn5fb9e4c4660d",
-        //         "x-rapidapi-host": "football-prediction-api.p.rapidapi.com"
-        //     }
-        // })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         setMatches(data);
-        //     })
-        //     .then(() => {
-        //         console.log(matches);
-        //     })
-        //     // .then(response => {
-        //     //     console.log(response);
-        //     // })
-        //     .catch(err => {
-        //         console.error(err);
-        //     });
-    })
 
     return (
         <div>
@@ -85,7 +41,6 @@ const PredictScore = () => {
                                 <button className="btn rounded mx-2 text-white" style={{ backgroundColor: "#1d0033" }}>History</button>
                                 <button className="btn rounded mx-2 text-white" style={{ backgroundColor: "#1d0033" }}>Pool</button>
                             </div>
-
                         </div>
                         <BorderLinearProgress variant="determinate" value={60} />
                     </div>

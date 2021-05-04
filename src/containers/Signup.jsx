@@ -15,6 +15,7 @@ import Collapse from '@material-ui/core/Collapse';
 import Alert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+import swal from 'sweetalert';
 import firebase from '../config/firebase';
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -71,7 +72,16 @@ const Signup = () => {
                     game: data.favTeam,
                 })
                     .then(() => {
-                        history.push('/favoriteteam');
+                        var user = firebase.auth().currentUser;
+
+                        user.sendEmailVerification().then(function () {
+                            swal("You will receive an email confirmation with a link. Click on the link to complete your registration. If you can't see our email, please check your spam or deleted mail folders - it might be in there.")
+                                .then((value) => {
+                                    history.push('/login');
+                                });
+                        }).catch(function (error) {
+                            // An error happened.
+                        });
                     })
             })
             .catch((error) => {

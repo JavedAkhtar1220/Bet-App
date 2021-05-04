@@ -14,15 +14,15 @@ const PL = () => {
     const history = useHistory();
 
     const goToFootball = () => {
-        history.push('/football');
+        history.push('/professionalleague/football');
     }
 
     const goToBasketball = () => {
-        history.push('/basketball');
+        history.push('/professionalleague/basketball');
     }
 
     const goToHandball = () => {
-        history.push('/handball');
+        history.push('/professionalleague/handball');
     }
 
     const goToBack = () => {

@@ -1,18 +1,24 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import Navbar from '../../../components/Navbar';
+import Navbar from '../../../../components/Navbar';
+import FavTeam from '../../../../components/FavTeam';
 // import football from '../../../images/football.png';
-import BorderLinearProgress from '../../../components/BorderLinearProgress';
+import BorderLinearProgress from '../../../../components/BorderLinearProgress';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import background from '../../../images/background.jpg';
-import FavTeam from '../../../components/FavTeam';
 
-const HLeague3 = () => {
 
+
+
+const BLeague1 = () => {
     const history = useHistory();
 
+    const team = (team) => {
+        localStorage.setItem('team', team)
+        history.push('/selectoption');
+    }
+
     const goToBack = () => {
-        history.push('/handball');
+        history.goBack();
     }
 
     return (
@@ -34,28 +40,28 @@ const HLeague3 = () => {
                             </button>
                         </div>
                         <FavTeam />
-                        <h1 className="signup_title mt-4">Handball-Teams (League C)</h1>
+                        <h1 className="signup_title mt-4">Basketball-Teams (League A)</h1>
                         <BorderLinearProgress variant="determinate" value={60} />
                     </div>
                     <div className="row mt-5">
                         <div className="col-lg-3 col-md-3 col-sm-4 col-10 mb-3">
-                            <button className="btn_team shadow border">
-                                <img src={background} alt="abv" className="team_img" />
+                            <button className="btn_team shadow border p-4">
+                                Team 1
                             </button>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-4 col-10 mb-3">
-                            <button className="btn_team shadow border">
-                                <img src={background} alt="abv" className="team_img" />
+                            <button className="btn_team shadow border p-4">
+                                Team 2
                             </button>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-4 col-10 mb-3">
-                            <button className="btn_team shadow border">
-                                <img src={background} alt="abv" className="team_img" />
+                            <button className="btn_team shadow border p-4">
+                                Team 3
                             </button>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-4 col-10 mb-3">
-                            <button className="btn_team shadow border">
-                                <img src={background} alt="abv" className="team_img" />
+                            <button className="btn_team shadow border p-4">
+                                Team 3
                             </button>
                         </div>
                     </div>
@@ -65,4 +71,4 @@ const HLeague3 = () => {
     )
 }
 
-export default HLeague3;
+export default BLeague1;
